@@ -1,4 +1,6 @@
 ﻿using AgendaDeContatos.Mvc.Models;
+using AgendaDeContatos.Test.Builders;
+using AgendaDeContatos.Test.Utils;
 using Bogus;
 using Bogus.Extensions.Brazil;
 
@@ -19,8 +21,8 @@ public class FilialTest
         _id = Random.Shared.Next();
         _nomeDeExibicao = faker.Company.CompanyName();
         _cidade = faker.Address.City();
-        _estado = faker.Address.State();
-        _cnpj = faker.Company.Cnpj();
+        _estado = faker.Random.String2(2).ToUpper();
+        _cnpj = faker.Company.Cnpj().Replace(".", "").Replace("/", "").Replace("-", "");
     }
 
     [Fact]
@@ -55,4 +57,58 @@ public class FilialTest
         Assert.Null(filial.Estado);
         Assert.Equal(_nomeDeExibicao, filial.NomeDeExibicao);
     }
+
+
+    private const string cnpjCom15Dgitos = "123456789012345";
+    private const string cnpjCom13Digitos = "1234567890123";
+    private const string cnpjComCaractereNaoNumerico = "123.567A9-1234";
+    [Theory]
+    [InlineData(cnpjCom15Dgitos)]
+    [InlineData(cnpjCom13Digitos)]
+    [InlineData(cnpjComCaractereNaoNumerico)]
+    public void Cnpj_NaoDeveSerInvalido(string cnpjInvalido)
+    {
+        var filial = new Filial(_nomeDeExibicao);
+
+        Assert.Throws<ArgumentException>(() => filial.Cnpj = cnpjInvalido)
+            .WithMessage($"Cnpj invalido : {cnpjInvalido}");
+    }
+
+    private const string _estadoCom1Digito = "A";
+    private const string _estadoCom3Digitos = "ABC";
+    [Theory]
+    [InlineData(_estadoCom1Digito)]
+    [InlineData(_estadoCom3Digitos)]
+    public void Estado_NaoDeveSerInvalido(string estadoInvalido)
+    {
+        var filial = FilialBuilder.Create().Build();
+
+        Assert.Throws<ArgumentException>(() =>
+            filial.Estado = estadoInvalido)
+            .WithMessage($"Estado invalido : {estadoInvalido}");
+    }
+
+    [Fact]
+    public void Estado_DeveSerUpper()
+    {
+        var estadoNotUper = "aa";
+        var filial = FilialBuilder.Create().Build();
+        
+        filial.Estado = estadoNotUper;
+
+        Assert.NotNull(filial.Estado);
+        Assert.Equal(estadoNotUper.ToUpper(), filial.Estado);
+    }
+
+    [Fact]
+    public void Estado_NaoDeveConterNumero()
+    {
+        var estadoInvalido = "12";
+        var filial = FilialBuilder.Create().Build();
+
+        Assert.Throws<ArgumentException>(() =>
+            filial.Estado = estadoInvalido)
+            .WithMessage($"Estado invalido : {estadoInvalido}");
+    }
+
 }
