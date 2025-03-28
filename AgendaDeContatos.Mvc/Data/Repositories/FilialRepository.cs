@@ -18,6 +18,9 @@ public class FilialRepository : IFilialRepository
 
     public void Create(Filial entity)
     {
+        if (entity.Id != 0)
+            throw new InvalidOperationException("Nao e possivel armazenar um objeto que possui ID definido");
+
         _compatibility.Verify(entity);
 
         _context.Filiais.Add(entity);
