@@ -22,7 +22,7 @@ internal class ContatoBuilder
         _setorId = random.Next();
         _nome = faker.Person.FullName;
         _email = faker.Person.Email;
-        _celular = faker.Person.Phone;
+        _celular = faker.Random.String2(11,"1234567890");
         _ramal = faker.Random.String2(4,"1234567890");
     }
 
