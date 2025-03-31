@@ -21,7 +21,7 @@ public class ContatoRepositoryTest
     public ContatoRepositoryTest()
     {
         _context = Create.MockedDbContextFor<AppDbContext>();
-        _repository = new ContatoRepository(_context, new CheckCompatibilityContato());
+        _repository = new ContatoRepository(_context);
 
         var filial = FilialBuilder.Create().Build();
         _setor = SetorBuilder.Create().WithFilialId(filial.Id).Build();

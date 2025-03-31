@@ -7,13 +7,10 @@ namespace AgendaDeContatos.Mvc.Data.Repositories;
 public class ContatoRepository : IRepository<Contato>
 {
     private AppDbContext _context;
-    private CheckCompatibilityContato _compatibility;
 
-
-    public ContatoRepository(AppDbContext context, CheckCompatibilityContato compatibility)
+    public ContatoRepository(AppDbContext context)
     {
         this._context = context;
-        this._compatibility = compatibility;
     }
 
 
@@ -46,6 +43,6 @@ public class ContatoRepository : IRepository<Contato>
         if (_context.Setores.FirstOrDefault(s => s.Id == model.SetorId) == null)
             throw new InvalidOperationException($"Setor nao existe na base: {model.SetorId}");
 
-        _compatibility.Verify(model);
+        _context.CompatibilityContato.Verify(model);
     }
 }

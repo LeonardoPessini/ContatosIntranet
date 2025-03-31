@@ -19,7 +19,7 @@ public class SetorRepositoryTest
     public SetorRepositoryTest()
     {
         _context = Create.MockedDbContextFor<AppDbContext>();
-        _repository = new SetorRepository(_context, new CheckCompatibilitySetor());
+        _repository = new SetorRepository(_context);
         _setor = SetorBuilder.Create().Build();
         _filial = FilialBuilder.Create().Build();
 

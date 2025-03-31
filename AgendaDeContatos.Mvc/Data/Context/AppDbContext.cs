@@ -1,4 +1,6 @@
-﻿using AgendaDeContatos.Mvc.Models;
+﻿using AgendaDeContatos.Mvc.Data.Repositories;
+using AgendaDeContatos.Mvc.Data.Repositories.Interfaces;
+using AgendaDeContatos.Mvc.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaDeContatos.Mvc.Data.Context;
@@ -9,8 +11,19 @@ public class AppDbContext : DbContext
     public DbSet<Setor> Setores { get; set; }
     public DbSet<Contato> Conatatos { get; set; }
 
+
+    public CheckCompatibilityFilial CompatibilityFilial { get; init; }
+    public CheckCompatibilitySetor CompatibilitySetor { get; init; }
+    public CheckCompatibilityContato CompatibilityContato { get; init; }
+
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    { }
+    { 
+        CompatibilityFilial = new CheckCompatibilityFilial();
+        CompatibilitySetor = new CheckCompatibilitySetor();
+        CompatibilityContato = new CheckCompatibilityContato();
+    }
+
 
     protected override void OnModelCreating(ModelBuilder model)
     {

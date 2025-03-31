@@ -8,12 +8,10 @@ namespace AgendaDeContatos.Mvc.Data.Repositories;
 public class SetorRepository : IRepository<Setor>
 {
     private AppDbContext _context;
-    private ICheckCompatibilityModelData<Setor> _compatibility;
 
-    public SetorRepository(AppDbContext context, ICheckCompatibilityModelData<Setor> verify)
+    public SetorRepository(AppDbContext context)
     {
         _context = context;
-        _compatibility = verify;
     }
 
 
@@ -36,7 +34,7 @@ public class SetorRepository : IRepository<Setor>
         if (!filialExisteNaBase)
             throw new InvalidOperationException($"Filial nao existe na base: {entity.FilialId}");
 
-        _compatibility.Verify(entity);
+        _context.CompatibilitySetor.Verify(entity);
     }
 
 

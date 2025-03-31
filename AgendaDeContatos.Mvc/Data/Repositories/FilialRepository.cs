@@ -8,13 +8,10 @@ namespace AgendaDeContatos.Mvc.Data.Repositories;
 public class FilialRepository : IRepository<Filial>
 {
     private readonly AppDbContext _context;
-    private readonly ICheckCompatibilityModelData<Filial> _compatibility;
 
-
-    public FilialRepository(AppDbContext context, ICheckCompatibilityModelData<Filial> verify)
+    public FilialRepository(AppDbContext context)
     {
         _context = context;
-        _compatibility = verify;
     }
 
 
@@ -32,7 +29,7 @@ public class FilialRepository : IRepository<Filial>
         if (entity.Id != 0)
             throw new InvalidOperationException("Nao e possivel armazenar um objeto que possui ID definido");
 
-        _compatibility.Verify(entity);
+        _context.CompatibilityFilial.Verify(entity);
     }
 
 

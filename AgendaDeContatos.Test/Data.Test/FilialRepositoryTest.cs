@@ -18,7 +18,7 @@ public class FilialRepositoryTest
     public FilialRepositoryTest()
     {
         _context = Create.MockedDbContextFor<AppDbContext>();
-        _repository = new FilialRepository(_context, new CheckCompatibilityFilial());
+        _repository = new FilialRepository(_context);
         _filial = FilialBuilder.Create().WithId(0).Build();
 
         _context.Filiais.Add(_filial);
