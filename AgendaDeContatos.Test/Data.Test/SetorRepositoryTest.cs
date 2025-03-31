@@ -1,5 +1,6 @@
 ﻿using AgendaDeContatos.Mvc.Data.Context;
 using AgendaDeContatos.Mvc.Data.Repositories;
+using AgendaDeContatos.Mvc.Data.Repositories.Interfaces;
 using AgendaDeContatos.Mvc.Models;
 using AgendaDeContatos.Test.Builders;
 using AgendaDeContatos.Test.Utils;
