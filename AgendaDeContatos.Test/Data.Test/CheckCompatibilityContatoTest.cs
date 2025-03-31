@@ -8,14 +8,17 @@ namespace AgendaDeContatos.Test.Data.Test;
 public class CheckCompatibilityContatoTest
 {
     private CheckCompatibilityContato _compatibility;
+    private ContatoBuilder _contatoBuider;
 
     public CheckCompatibilityContatoTest()
     {
         _compatibility = new CheckCompatibilityContato();
+        _contatoBuider = ContatoBuilder.Create();
     }
 
+
     [Fact]
-    public void Verify_IsCompatible_NaoLancaExceptionSeCompativel()
+    public void Verify_IsCompatible_ValidaCompatibilidadeOK()
     {
         var randomizer = new Randomizer();
         var nomeOk = randomizer.String2(50);
@@ -34,59 +37,51 @@ public class CheckCompatibilityContatoTest
         Assert.True(_compatibility.IsCompatible(contato));
     }
 
+
     [Fact]
-    public void Verify_IsCompatible_LancaExceptionSeNomeIncompativel()
+    public void Verify_IsCompatible_ValidarNomeIncompativel()
     {
         var nomeMuitoGrande = new Randomizer().String2(51);
-        var contato = ContatoBuilder.Create()
-                                    .WithNome(nomeMuitoGrande)
-                                    .Build();
+        var contato = _contatoBuider.WithNome(nomeMuitoGrande).Build();
 
         Assert.Throws<OverflowException>(() => _compatibility.Verify(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Nome}");
-
+                                        .WithMessage($"Valor muito grande para ser armazenado : {contato.Nome}");
         Assert.False(_compatibility.IsCompatible(contato));
     }
 
+
     [Fact]
-    public void Verify_IsCompatible_LancaExceptionSeRamalIncompativel()
+    public void Verify_IsCompatible_ValidarRamalIncompativel()
     {
         var ramalMuitoGrande = new Randomizer().String2(11);
-        var contato = ContatoBuilder.Create()
-                                    .WithRamal(ramalMuitoGrande)
-                                    .Build();
+        var contato = _contatoBuider.WithRamal(ramalMuitoGrande).Build();
 
         Assert.Throws<OverflowException>(() => _compatibility.Verify(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Ramal}");
-
+                                        .WithMessage($"Valor muito grande para ser armazenado : {contato.Ramal}");
         Assert.False(_compatibility.IsCompatible(contato));
     }
 
+
     [Fact]
-    public void Verify_IsCompatible_LancaExceptionSeEmailIncompativel()
+    public void Verify_IsCompatible_ValidarEmailIncompativel()
     {
         var emailMuitoGrande = new Randomizer().String2(101);
-        var contato = ContatoBuilder.Create()
-                                    .WithEmail(emailMuitoGrande)
-                                    .Build();
+        var contato = _contatoBuider.WithEmail(emailMuitoGrande).Build();
 
         Assert.Throws<OverflowException>(() => _compatibility.Verify(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Email}");
-
+                                        .WithMessage($"Valor muito grande para ser armazenado : {contato.Email}");
         Assert.False(_compatibility.IsCompatible(contato));
     }
 
+
     [Fact]
-    public void Verify_IsCompatible_LancaExceptionSeCelularIncompativel()
+    public void Verify_IsCompatible_ValidarCelularIncompativel()
     {
         var celularMuitoGrande = new Randomizer().String2(15);
-        var contato = ContatoBuilder.Create()
-                                    .WithCelular(celularMuitoGrande)
-                                    .Build();
+        var contato = _contatoBuider.WithCelular(celularMuitoGrande).Build();
 
         Assert.Throws<OverflowException>(() => _compatibility.Verify(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Celular}");
-
+                                        .WithMessage($"Valor muito grande para ser armazenado : {contato.Celular}");
         Assert.False(_compatibility.IsCompatible(contato));
     }
 }

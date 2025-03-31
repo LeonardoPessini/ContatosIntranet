@@ -7,64 +7,55 @@ using Bogus;
 using EntityFrameworkCore.Testing.Moq;
 
 namespace AgendaDeContatos.Test.Data.Test;
+
 public class CheckCompatibilityFilialTest
 {
     private CheckCompatibilityFilial _compatibility;
-    private Filial _filialComNomeOverflow;
-    private Filial _filialComCidadeOverflow;
-    private Filial _filialOk;
-    
+    private readonly Randomizer _randomizer;
+
+
     public CheckCompatibilityFilialTest()
     {
-        var randomizer = new Randomizer();
-        var nomeExibicaoMuitoGrande = randomizer.String2(31);
-        var nomeCidadeMuitoGrande = randomizer.String2(41);
-        var nomeAceitavel = randomizer.String2(30);
-        var cidadeAceitavel = randomizer.String2(40);
+        _randomizer = new Randomizer();
         _compatibility = new CheckCompatibilityFilial();
-
-        _filialComNomeOverflow = FilialBuilder.Create().WithNome(nomeExibicaoMuitoGrande).Build();
-        _filialComCidadeOverflow = FilialBuilder.Create().WithCidade(nomeCidadeMuitoGrande).Build();
-        _filialOk = FilialBuilder.Create().WithNome(nomeAceitavel).WithCidade(cidadeAceitavel).Build();
     }
 
-    [Fact]
-    public void IsCompatible_RetornarTrueNaCompatibilidade()
-    {
-        Assert.True(_compatibility.IsCompatible(_filialOk));
-    }
 
     [Fact]
-    public void Verify_NaoLancaExceptionNaCompatibilidade()
+    public void Verify_IsCompatible_ValidaCompatibilidadeOK()
     {
-        _compatibility.Verify(_filialOk);
+        var nomeAceitavel = _randomizer.String2(30);
+        var cidadeAceitavel = _randomizer.String2(40);
+
+        var filialOk = FilialBuilder.Create()
+                                    .WithNome(nomeAceitavel)
+                                    .WithCidade(cidadeAceitavel)
+                                    .Build();
+        _compatibility.Verify(filialOk);
+        Assert.True(_compatibility.IsCompatible(filialOk));
     }
 
-    [Fact]
-    public void Verify_NomeDeExibicao_LancarExceptionNaIncompatibilidade()
-    {
-        Assert.Throws<OverflowException>(() =>
-            _compatibility.Verify(_filialComNomeOverflow))
-            .WithMessage($"Valor muito grande para ser armazenado : {_filialComNomeOverflow.Nome}");
-    }
 
     [Fact]
-    public void IsCompatible_NomeDeExibicao_RetornarFalseNaIncompatibilidade()
+    public void Verify_IsCompatible_ValidarNomeDeExibicaoIncompativel()
     {
-        Assert.False(_compatibility.IsCompatible( _filialComNomeOverflow));
+        var nomeExibicaoMuitoGrande = _randomizer.String2(31);
+        var filialComNomeOverflow = FilialBuilder.Create().WithNome(nomeExibicaoMuitoGrande).Build();
+
+        Assert.Throws<OverflowException>(() => _compatibility.Verify(filialComNomeOverflow))
+                                        .WithMessage($"Valor muito grande para ser armazenado : {filialComNomeOverflow.Nome}");
+        Assert.False(_compatibility.IsCompatible(filialComNomeOverflow));
     }
 
-    [Fact]
-    public void Verify_Cidade_LancarExceptionNaIncompatibilidade()
-    {
-        Assert.Throws<OverflowException>(() =>
-            _compatibility.Verify(_filialComCidadeOverflow))
-            .WithMessage($"Valor muito grande para ser armazenado : {_filialComCidadeOverflow.Cidade}");
-    }
 
     [Fact]
-    public void IsCompatible_Cidade_RetornarFalseNaIncompatibilidade()
+    public void Verify_IsCompatible_ValidarCidadeIncompativel()
     {
-        Assert.False(_compatibility.IsCompatible(_filialComCidadeOverflow));
+        var nomeCidadeMuitoGrande = _randomizer.String2(41);
+        var filialComCidadeOverflow = FilialBuilder.Create().WithCidade(nomeCidadeMuitoGrande).Build();
+
+        Assert.Throws<OverflowException>(() => _compatibility.Verify(filialComCidadeOverflow))
+                                        .WithMessage($"Valor muito grande para ser armazenado : {filialComCidadeOverflow.Cidade}");
+        Assert.False(_compatibility.IsCompatible(filialComCidadeOverflow));
     }
 }

@@ -11,43 +11,34 @@ namespace AgendaDeContatos.Test.Data.Test;
 public class CheckCompatibilitySetorTest
 {
     private CheckCompatibilitySetor _compatibility;
-    private Setor _setorComNomeOverflow;
-    private Setor _setorOk;
+    private readonly Randomizer _randomizer;
 
     public CheckCompatibilitySetorTest()
     {
-        var randomizer = new Randomizer();
-        var nomeMuitoGrande = randomizer.String2(41);
-        var nomeAceitavel = randomizer.String2(40);
+        _randomizer = new Randomizer();
         _compatibility = new CheckCompatibilitySetor();
-
-        _setorComNomeOverflow = SetorBuilder.Create().WithNome(nomeMuitoGrande).Build();
-        _setorOk = SetorBuilder.Create().WithNome(nomeAceitavel).Build();
     }
+
 
     [Fact]
-    public void Iscompatible_Nome_DeveRetornarTrueSeCompativel()
+    public void Verify_Iscompatible_ValidarCompatibilidadeOK()
     {
-        Assert.True(_compatibility.IsCompatible(_setorOk));
+        var nomeAceitavel = _randomizer.String2(40);
+        var setorOk = SetorBuilder.Create().WithNome(nomeAceitavel).Build();
+
+        _compatibility.Verify(setorOk);
+        Assert.True(_compatibility.IsCompatible(setorOk));
     }
 
-    [Fact]
-    public void Verify_Nome_NaoLancaExceptionSeCompativel()
-    {
-        _compatibility.Verify(_setorOk);
-    }
 
     [Fact]
     public void Verify_LancaExceptionSeIncompativel()
     {
-        Assert.Throws<OverflowException>(() =>
-            _compatibility.Verify(_setorComNomeOverflow))
-            .WithMessage($"Valor muito grande para ser armazenado : {_setorComNomeOverflow.Nome}");
-    }
+        var nomeMuitoGrande = _randomizer.String2(41);
+        var setorComNomeOverflow = SetorBuilder.Create().WithNome(nomeMuitoGrande).Build();
 
-    [Fact]
-    public void IsCompatible_RetornaFalseSeIncompativel()
-    {
-        Assert.False(_compatibility.IsCompatible(_setorComNomeOverflow));
+        Assert.Throws<OverflowException>(() =>_compatibility.Verify(setorComNomeOverflow))
+                                        .WithMessage($"Valor muito grande para ser armazenado : {setorComNomeOverflow.Nome}");
+        Assert.False(_compatibility.IsCompatible(setorComNomeOverflow));
     }
 }
