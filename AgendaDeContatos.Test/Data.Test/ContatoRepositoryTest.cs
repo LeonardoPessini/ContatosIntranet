@@ -13,7 +13,7 @@ namespace AgendaDeContatos.Test.Data.Test;
 public class ContatoRepositoryTest
 {
     private AppDbContext _context;
-    private IContatoRepository _repository;
+    private IRepository<Contato> _repository;
     private Contato _contato;
     private Setor _setor;
 

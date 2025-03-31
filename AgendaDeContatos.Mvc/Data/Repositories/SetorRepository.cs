@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgendaDeContatos.Mvc.Data.Repositories;
 
-public class SetorRepository : ISetorRepository
+public class SetorRepository : IRepository<Setor>
 {
     private AppDbContext _context;
     private ICheckCompatibilityModelData<Setor> _compatibility;

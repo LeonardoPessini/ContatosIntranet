@@ -4,7 +4,7 @@ using AgendaDeContatos.Mvc.Models;
 
 namespace AgendaDeContatos.Mvc.Data.Repositories;
 
-public class ContatoRepository : IContatoRepository
+public class ContatoRepository : IRepository<Contato>
 {
     private AppDbContext _context;
     private CheckCompatibilityContato _compatibility;

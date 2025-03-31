@@ -12,7 +12,7 @@ namespace AgendaDeContatos.Test.Data.Test;
 public class SetorRepositoryTest
 {
     private AppDbContext _context;
-    private ISetorRepository _repository;
+    private IRepository<Setor> _repository;
     private Setor _setor;
     private Filial _filial;
 

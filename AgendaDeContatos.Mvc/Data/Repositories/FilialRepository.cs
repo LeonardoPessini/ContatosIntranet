@@ -5,7 +5,7 @@ using System;
 
 namespace AgendaDeContatos.Mvc.Data.Repositories;
 
-public class FilialRepository : IFilialRepository
+public class FilialRepository : IRepository<Filial>
 {
     private readonly AppDbContext _context;
     private readonly ICheckCompatibilityModelData<Filial> _compatibility;

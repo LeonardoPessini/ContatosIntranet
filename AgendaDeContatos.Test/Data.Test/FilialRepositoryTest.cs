@@ -11,7 +11,7 @@ namespace AgendaDeContatos.Test.Data.Test;
 public class FilialRepositoryTest
 {
     private readonly AppDbContext _context;
-    private readonly IFilialRepository _repository;
+    private readonly IRepository<Filial> _repository;
     private readonly Filial _filial;
 
 
