@@ -1,6 +1,6 @@
 ﻿namespace AgendaDeContatos.Mvc.Data.Repositories.Interfaces;
 
-public interface IVerifyCompatibilityModelData<T>
+public interface ICheckCompatibilityModelData<T>
 {
     bool IsCompatible(T model);
     void Verify(T model);

@@ -8,29 +8,39 @@ namespace AgendaDeContatos.Mvc.Data.Repositories;
 public class FilialRepository : IFilialRepository
 {
     private readonly AppDbContext _context;
-    private readonly IVerifyCompatibilityModelData<Filial> _compatibility;
+    private readonly ICheckCompatibilityModelData<Filial> _compatibility;
 
-    public FilialRepository(AppDbContext context, IVerifyCompatibilityModelData<Filial> verify)
+
+    public FilialRepository(AppDbContext context, ICheckCompatibilityModelData<Filial> verify)
     {
         _context = context;
         _compatibility = verify;
     }
 
+
     public void Create(Filial entity)
     {
-        if (entity.Id != 0)
-            throw new InvalidOperationException("Nao e possivel armazenar um objeto que possui ID definido");
-
-        _compatibility.Verify(entity);
+        CheckIfItCanBeStored(entity);
 
         _context.Filiais.Add(entity);
         _context.SaveChanges();
     }
 
+
+    private void CheckIfItCanBeStored(Filial entity)
+    {
+        if (entity.Id != 0)
+            throw new InvalidOperationException("Nao e possivel armazenar um objeto que possui ID definido");
+
+        _compatibility.Verify(entity);
+    }
+
+
     public Filial? GetById(int id)
     {
         return _context.Filiais.SingleOrDefault(f => f.Id == id);
     }
+
 
     public IEnumerable<Filial> GetByName(string name)
     {

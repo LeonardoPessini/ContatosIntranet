@@ -3,7 +3,7 @@ using AgendaDeContatos.Mvc.Models;
 
 namespace AgendaDeContatos.Mvc.Data.Repositories;
 
-public class VerifyCompatibilityFilial : IVerifyCompatibilityModelData<Filial>
+public class CheckCompatibilityFilial : ICheckCompatibilityModelData<Filial>
 {
     public bool IsCompatible(Filial model)
     {

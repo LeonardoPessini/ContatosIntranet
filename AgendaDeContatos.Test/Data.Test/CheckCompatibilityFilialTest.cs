@@ -7,21 +7,21 @@ using Bogus;
 using EntityFrameworkCore.Testing.Moq;
 
 namespace AgendaDeContatos.Test.Data.Test;
-public class VerifyCompatibilityFilialTest
+public class CheckCompatibilityFilialTest
 {
-    private VerifyCompatibilityFilial _compatibility;
+    private CheckCompatibilityFilial _compatibility;
     private Filial _filialComNomeOverflow;
     private Filial _filialComCidadeOverflow;
     private Filial _filialOk;
     
-    public VerifyCompatibilityFilialTest()
+    public CheckCompatibilityFilialTest()
     {
         var randomizer = new Randomizer();
         var nomeExibicaoMuitoGrande = randomizer.String2(31);
         var nomeCidadeMuitoGrande = randomizer.String2(41);
         var nomeAceitavel = randomizer.String2(30);
         var cidadeAceitavel = randomizer.String2(40);
-        _compatibility = new VerifyCompatibilityFilial();
+        _compatibility = new CheckCompatibilityFilial();
 
         _filialComNomeOverflow = FilialBuilder.Create().WithNome(nomeExibicaoMuitoGrande).Build();
         _filialComCidadeOverflow = FilialBuilder.Create().WithCidade(nomeCidadeMuitoGrande).Build();
