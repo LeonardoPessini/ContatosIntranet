@@ -13,15 +13,17 @@ public class FilialRepositoryTest
     private readonly IFilialRepository _repository;
     private readonly Filial _filial;
 
+
     public FilialRepositoryTest()
     {
         _context = Create.MockedDbContextFor<AppDbContext>();
-        _repository = new FilialRepository(_context, new VerifyCompatibilityFilial());
+        _repository = new FilialRepository(_context, new CheckCompatibilityFilial());
         _filial = FilialBuilder.Create().WithId(0).Build();
 
         _context.Filiais.Add(_filial);
         _context.SaveChanges();
     }
+
 
     private void AssertEqualFiliais(Filial expected, Filial actual)
     {
@@ -41,12 +43,14 @@ public class FilialRepositoryTest
         AssertEqualFiliais(_filial, filialObtida);
     }
 
+
     [Fact]
     public void GetById_DeveRetornarNuloCasoNaoExista()
     {
         var filial = _repository.GetById(-1);
         Assert.Null(filial);
     }
+
 
     [Fact]
     public void GetByNome_DeveConsultarFilialPorNome()
@@ -57,12 +61,14 @@ public class FilialRepositoryTest
         AssertEqualFiliais(_filial, filialObtida.Single());
     }
 
+
     [Fact]
     public void GetByNome_DeveRetornarVazioCasoNaoExista()
     {
         var filial = _repository.GetByName("nomeInexistente");
         Assert.Empty(filial);
     }
+
 
     [Fact]
     public void Create_DeveCriarFilial()
@@ -75,6 +81,7 @@ public class FilialRepositoryTest
         AssertEqualFiliais(filial, filialCreated);
     }
 
+
     [Fact]
     public void Create_NomeDeExibicao_NaoDeveCriarComValorMaiorQueODaColuna()
     {
@@ -84,6 +91,7 @@ public class FilialRepositoryTest
         Assert.Throws<OverflowException>(()=> _repository.Create(filial))
             .WithMessage($"Valor muito grande para ser armazenado : {filial.NomeDeExibicao}");
     }
+
 
     [Fact]
     public void Create_Cidade_NaoDeveCriarComValorMaiorQueODaColuna()
@@ -95,6 +103,7 @@ public class FilialRepositoryTest
             .WithMessage($"Valor muito grande para ser armazenado : {filial.Cidade}");
     }
 
+
     [Fact]
     public void Create_DeveLancarExceptionSeIdForDiferenteDe0()
     {
@@ -104,9 +113,14 @@ public class FilialRepositoryTest
             .WithMessage("Nao e possivel armazenar um objeto que possui ID definido");
     }
 
+
     [Fact]
     public void Create_DeveAtribuirIdAoObjetoCriado()
     {
-        Assert.NotEqual(0, _filial.Id);
+        var filial = FilialBuilder.Create().WithId(0).Build();
+
+        _repository.Create(filial);
+
+        Assert.NotEqual(0, filial.Id);
     }
 }
