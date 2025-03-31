@@ -37,7 +37,7 @@ internal class FilialBuilder
         return new Filial(_nomeDeExibicao)
         {
             Id = _id,
-            NomeDeExibicao = _nomeDeExibicao,
+            Nome = _nomeDeExibicao,
             Cidade = _cidade,
             Estado = _estado,
             Cnpj = _cnpj

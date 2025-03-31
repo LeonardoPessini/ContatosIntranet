@@ -45,7 +45,7 @@ public class CheckCompatibilityFilialTest
     {
         Assert.Throws<OverflowException>(() =>
             _compatibility.Verify(_filialComNomeOverflow))
-            .WithMessage($"Valor muito grande para ser armazenado : {_filialComNomeOverflow.NomeDeExibicao}");
+            .WithMessage($"Valor muito grande para ser armazenado : {_filialComNomeOverflow.Nome}");
     }
 
     [Fact]

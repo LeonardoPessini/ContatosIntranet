@@ -18,8 +18,8 @@ public class CheckCompatibilityFilial : ICheckCompatibilityModelData<Filial>
 
     public void Verify(Filial model)
     {
-        if (model.NomeDeExibicao.Length > 30)
-            throw new OverflowException($"Valor muito grande para ser armazenado : {model.NomeDeExibicao}");
+        if (model.Nome.Length > 30)
+            throw new OverflowException($"Valor muito grande para ser armazenado : {model.Nome}");
 
         if (model.Cidade != null && model.Cidade.Length > 40)
             throw new OverflowException($"Valor muito grande para ser armazenado : {model.Cidade}");

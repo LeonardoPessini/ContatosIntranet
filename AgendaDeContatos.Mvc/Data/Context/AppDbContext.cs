@@ -33,7 +33,7 @@ public class AppDbContext : DbContext
         var setor = model.Entity<Setor>();
         var contatos = model.Entity<Contato>();
 
-        filial.Property(f => f.NomeDeExibicao).HasMaxLength(30);
+        filial.Property(f => f.Nome).HasMaxLength(30);
         filial.Property(f => f.Cidade).HasMaxLength(40);
         filial.Property(f => f.Estado).HasMaxLength(2).IsFixedLength();
         filial.Property(f => f.Cnpj).HasMaxLength(14).IsFixedLength();

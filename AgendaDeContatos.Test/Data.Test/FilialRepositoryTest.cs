@@ -28,7 +28,7 @@ public class FilialRepositoryTest
 
     private void AssertEqualFiliais(Filial expected, Filial actual)
     {
-        Assert.Equal(expected.NomeDeExibicao, actual.NomeDeExibicao);
+        Assert.Equal(expected.Nome, actual.Nome);
         Assert.Equal(expected.Estado, actual.Estado);
         Assert.Equal(expected.Cidade, actual.Cidade);
         Assert.Equal(expected.Cnpj, actual.Cnpj);
@@ -56,7 +56,7 @@ public class FilialRepositoryTest
     [Fact]
     public void GetByNome_DeveConsultarFilialPorNome()
     {
-        var filialObtida = _repository.GetByName(_filial.NomeDeExibicao);
+        var filialObtida = _repository.GetByName(_filial.Nome);
 
         Assert.NotNull(filialObtida);
         AssertEqualFiliais(_filial, filialObtida.Single());
@@ -90,7 +90,7 @@ public class FilialRepositoryTest
         var filial = FilialBuilder.Create().WithNome(nomeMuitoGrande).WithId(0).Build();
 
         Assert.Throws<OverflowException>(()=> _repository.Create(filial))
-            .WithMessage($"Valor muito grande para ser armazenado : {filial.NomeDeExibicao}");
+            .WithMessage($"Valor muito grande para ser armazenado : {filial.Nome}");
     }
 
 

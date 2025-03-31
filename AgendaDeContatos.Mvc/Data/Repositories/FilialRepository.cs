@@ -42,7 +42,7 @@ public class FilialRepository : IRepository<Filial>
     public IEnumerable<Filial> GetByName(string name)
     {
         return _context.Filiais
-            .Where(f => f.NomeDeExibicao.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .Where(f => f.Nome.Contains(name, StringComparison.OrdinalIgnoreCase))
             .ToList();
     }
 }

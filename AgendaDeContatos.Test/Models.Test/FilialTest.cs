@@ -38,7 +38,7 @@ public class FilialTest
 
         Assert.NotNull(filial);
         Assert.Equal(_id, filial.Id);
-        Assert.Equal(_nomeDeExibicao, filial.NomeDeExibicao);
+        Assert.Equal(_nomeDeExibicao, filial.Nome);
         Assert.Equal(_cidade, filial.Cidade);
         Assert.Equal(_estado, filial.Estado);
         Assert.Equal(_cnpj, filial.Cnpj);
@@ -55,7 +55,7 @@ public class FilialTest
         Assert.Null(filial.Cnpj);
         Assert.Null(filial.Cidade);
         Assert.Null(filial.Estado);
-        Assert.Equal(_nomeDeExibicao, filial.NomeDeExibicao);
+        Assert.Equal(_nomeDeExibicao, filial.Nome);
     }
 
 

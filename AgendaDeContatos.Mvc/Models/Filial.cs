@@ -3,7 +3,7 @@
 public class Filial
 {
     public int Id { get; init; }
-    public string NomeDeExibicao { get; set; } = null!;
+    public string Nome { get; set; } = null!;
     public string? Cidade { get; set; }
 
     private string? _estado;
@@ -48,7 +48,7 @@ public class Filial
 
     public Filial(string nomeDeExibicao)
     {
-        NomeDeExibicao = nomeDeExibicao;
+        Nome = nomeDeExibicao;
     }
 
     public List<Setor>? Setores { get; set; }
