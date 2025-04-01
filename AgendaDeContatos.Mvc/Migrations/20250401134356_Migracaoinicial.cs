@@ -5,7 +5,7 @@
 namespace AgendaDeContatos.Mvc.Migrations
 {
     /// <inheritdoc />
-    public partial class MigracaoInicial : Migration
+    public partial class Migracaoinicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,7 @@ namespace AgendaDeContatos.Mvc.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeDeExibicao = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Cidade = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     Estado = table.Column<string>(type: "nchar(2)", fixedLength: true, maxLength: 2, nullable: true),
                     Cnpj = table.Column<string>(type: "nchar(14)", fixedLength: true, maxLength: 14, nullable: true)
@@ -47,7 +47,7 @@ namespace AgendaDeContatos.Mvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Conatatos",
+                name: "Contatos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -60,9 +60,9 @@ namespace AgendaDeContatos.Mvc.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Conatatos", x => x.Id);
+                    table.PrimaryKey("PK_Contatos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Conatatos_Setores_SetorId",
+                        name: "FK_Contatos_Setores_SetorId",
                         column: x => x.SetorId,
                         principalTable: "Setores",
                         principalColumn: "Id",
@@ -70,8 +70,8 @@ namespace AgendaDeContatos.Mvc.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Conatatos_SetorId",
-                table: "Conatatos",
+                name: "IX_Contatos_SetorId",
+                table: "Contatos",
                 column: "SetorId");
 
             migrationBuilder.CreateIndex(
@@ -84,7 +84,7 @@ namespace AgendaDeContatos.Mvc.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Conatatos");
+                name: "Contatos");
 
             migrationBuilder.DropTable(
                 name: "Setores");

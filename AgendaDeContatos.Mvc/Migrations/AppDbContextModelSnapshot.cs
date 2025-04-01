@@ -53,7 +53,7 @@ namespace AgendaDeContatos.Mvc.Migrations
 
                     b.HasIndex("SetorId");
 
-                    b.ToTable("Conatatos");
+                    b.ToTable("Contatos");
                 });
 
             modelBuilder.Entity("AgendaDeContatos.Mvc.Models.Filial", b =>
@@ -78,7 +78,7 @@ namespace AgendaDeContatos.Mvc.Migrations
                         .HasColumnType("nchar(2)")
                         .IsFixedLength();
 
-                    b.Property<string>("NomeDeExibicao")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");

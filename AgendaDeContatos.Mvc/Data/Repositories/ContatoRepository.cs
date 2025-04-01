@@ -18,18 +18,23 @@ public class ContatoRepository : IRepository<Contato>
     {
         CheckIfItCanBeStored(entity);
 
-        _context.Conatatos.Add(entity);
+        _context.Contatos.Add(entity);
         _context.SaveChanges();
+    }
+
+    public IEnumerable<Contato> GetAll()
+    {
+        return _context.Contatos.OrderBy(c => c.Setor.FilialId).ThenBy(c => c.SetorId).ThenBy(c => c.Nome).ToList();
     }
 
     public Contato? GetById(int id)
     {
-        return _context.Conatatos.FirstOrDefault(c => c.Id == id);
+        return _context.Contatos.FirstOrDefault(c => c.Id == id);
     }
 
     public IEnumerable<Contato> GetByName(string name)
     {
-        return _context.Conatatos.Where(c => c.Nome.Contains(name));
+        return _context.Contatos.Where(c => c.Nome.Contains(name));
     }
 
     private void CheckIfItCanBeStored(Contato model)

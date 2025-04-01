@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaDeContatos.Mvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250323225949_MigracaoInicial")]
-    partial class MigracaoInicial
+    [Migration("20250401134356_Migracaoinicial")]
+    partial class Migracaoinicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,7 @@ namespace AgendaDeContatos.Mvc.Migrations
 
                     b.HasIndex("SetorId");
 
-                    b.ToTable("Conatatos");
+                    b.ToTable("Contatos");
                 });
 
             modelBuilder.Entity("AgendaDeContatos.Mvc.Models.Filial", b =>
@@ -81,7 +81,7 @@ namespace AgendaDeContatos.Mvc.Migrations
                         .HasColumnType("nchar(2)")
                         .IsFixedLength();
 
-                    b.Property<string>("NomeDeExibicao")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");

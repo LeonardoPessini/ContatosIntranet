@@ -29,7 +29,7 @@ public class ContatoRepositoryTest
 
         _context.Filiais.Add(filial);
         _context.Setores.Add(_setor);
-        _context.Conatatos.Add(_contato);
+        _context.Contatos.Add(_contato);
         _context.SaveChanges();
     }
 
@@ -100,7 +100,7 @@ public class ContatoRepositoryTest
 
         _repository.Create(contato);
 
-        var contatoCriado = _context.Conatatos.FirstOrDefault(c => c.Id == contato.Id);
+        var contatoCriado = _context.Contatos.FirstOrDefault(c => c.Id == contato.Id);
 
         Assert.NotNull(contatoCriado);
         AssertEqualsContato(contato, contatoCriado);
@@ -113,7 +113,7 @@ public class ContatoRepositoryTest
         var contato = new Contato("teste", _setor.Id) { Email = "teste@gmail.com" };
 
         _repository.Create(contato);
-        var contatoCriado = _context.Conatatos.First(c => c.Id == contato.Id);
+        var contatoCriado = _context.Contatos.First(c => c.Id == contato.Id);
 
         Assert.NotNull(contatoCriado);
         AssertEqualsContato(contato, contatoCriado);
@@ -214,5 +214,16 @@ public class ContatoRepositoryTest
 
         Assert.Throws<InvalidOperationException>(() => _repository.Create(contato))
             .WithMessage($"Setor nao existe na base: {contato.SetorId}");
+    }
+
+    [Fact]
+    public void GetAll_DeveRetornarTodosRecursivamente()
+    {
+        var contato = _repository.GetAll().First();
+
+        AssertEqualsContato(_contato,contato);
+        Assert.NotNull(contato.Setor);
+        Assert.Equal(contato.Setor.Id, _setor.Id);
+        Assert.Equal(contato.Setor.Nome, _setor.Nome);
     }
 }

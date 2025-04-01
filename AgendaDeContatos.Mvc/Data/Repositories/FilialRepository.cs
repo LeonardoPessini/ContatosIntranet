@@ -45,4 +45,9 @@ public class FilialRepository : IRepository<Filial>
             .Where(f => f.Nome.Contains(name, StringComparison.OrdinalIgnoreCase))
             .ToList();
     }
+
+    public IEnumerable<Filial> GetAll()
+    {
+        return _context.Filiais.OrderBy(f => f.Id).ToList();
+    }
 }

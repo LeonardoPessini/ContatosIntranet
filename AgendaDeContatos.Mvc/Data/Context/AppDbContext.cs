@@ -9,7 +9,7 @@ public class AppDbContext : DbContext
 {
     public DbSet<Filial> Filiais { get; set; }
     public DbSet<Setor> Setores { get; set; }
-    public DbSet<Contato> Conatatos { get; set; }
+    public DbSet<Contato> Contatos { get; set; }
 
 
     public CheckCompatibilityFilial CompatibilityFilial { get; init; }

@@ -48,4 +48,9 @@ public class SetorRepository : IRepository<Setor>
     {
         return _context.Setores.Where(s => s.Nome.Contains(name));
     }
+
+    public IEnumerable<Setor> GetAll()
+    {
+        return _context.Setores.OrderBy(s => s.Filial).ThenBy(s => s.Nome).ToList();
+    }
 }
