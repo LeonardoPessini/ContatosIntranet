@@ -1,4 +1,7 @@
 using AgendaDeContatos.Mvc.Data.Context;
+using AgendaDeContatos.Mvc.Data.Repositories;
+using AgendaDeContatos.Mvc.Data.Repositories.Interfaces;
+using AgendaDeContatos.Mvc.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+builder.Services.AddScoped<ISearch<Contato>, ContatoRepository>();
 
 var app = builder.Build();
 
