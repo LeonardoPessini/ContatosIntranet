@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgendaDeContatos.Mvc</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Contatos Internos</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,6 +24,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                     </ul>
+                    <a class="btn btn-primary me-2" href="#">Solicitar atualização</a>
+                    <a class="btn btn-primary me-2" asp-area="" asp-controller="Admin" asp-action="index">Login</a>
+                    <div>
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle me-2" href="#" role="button" id="Cadastros" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cadastros
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="Areas">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Filial" asp-action="Index">Filiais</a></li>
+                                <li><a class="dropdown-item" href="#">Setores</a></li>
+                                <li><a class="dropdown-item" href="#">Contatos</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -12,6 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<ISearch<Contato>, ContatoRepository>();
+builder.Services.AddScoped<IRepository<Filial>, FilialRepository>();
 
 var app = builder.Build();
 

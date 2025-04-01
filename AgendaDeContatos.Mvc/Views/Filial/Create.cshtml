@@ -1,0 +1,27 @@
+﻿@model FilialViewModel
+
+<form class="row g-3" method="post" asp-controller="Filial" asp-action="Create">
+    <div class="col-12">
+        <label asp-for="Nome" class="form-label">* Nome de Exibição</label>
+        <input class="form-control" asp-for="Nome">
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Cidade" class="form-label">Cidade</label>
+        <input class="form-control" asp-for="Cidade">
+        <span asp-validation-for="Cidade" class="text-danger"></span>
+    </div>
+    <div class="col-md-2">
+        <label asp-for="Estado" class="form-label">Estado</label>
+        <input class="form-control" asp-for="Estado" placeholder="SP, ES, MG...">
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+    <div class="col-4">
+        <label asp-for="Cnpj" class="form-label">CNPJ</label>
+        <input type="text" class="form-control" asp-for="Cnpj" placeholder="Apenas numeros">
+        <span asp-validation-for="Cnpj" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Criar</button>
+    </div>
+</form>
