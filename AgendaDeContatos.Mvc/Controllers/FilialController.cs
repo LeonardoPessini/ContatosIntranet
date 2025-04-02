@@ -1,24 +1,22 @@
 ﻿using AgendaDeContatos.Mvc.Data.Repositories.Interfaces;
 using AgendaDeContatos.Mvc.Models;
-using AgendaDeContatos.Mvc.Models.ViewModel;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaDeContatos.Mvc.Controllers;
 public class FilialController : Controller
 {
-    private readonly IRepository<Filial> _repository;
-    private readonly FilialFactory _factory;
+    private readonly IRepository<Models.Filial> _repository;
 
-    public FilialController(IRepository<Filial> repository)
+    public FilialController(IRepository<Models.Filial> repository)
     {
         _repository = repository;
-        _factory = new FilialFactory();
     }
 
 
     public IActionResult Index()
     {
-        var filiais = _repository.GetAll().Select(f => _factory.CreateViewModelBasic(f));
+        var filiais = _repository.GetAll();
         return View(filiais);
     }
 
@@ -30,9 +28,33 @@ public class FilialController : Controller
         if(filial == null) 
             return NotFound();
 
-        var viewModel = _factory.CreateViewModelBasic(filial);
+        return View(filial);
+    }
 
-        return View(viewModel);
+    [HttpPost]
+    public IActionResult Edit(Filial filialEdit)
+    {
+        if(!ModelState.IsValid)
+            return View(filialEdit);
+
+        Console.WriteLine("ok");
+
+        if(filialEdit.Id == 0)
+            return BadRequest();
+
+        var model = _repository.GetById(filialEdit.Id);
+
+        if(model == null)
+            return NotFound();
+
+        model.Nome = filialEdit.Nome;
+        model.Cnpj = filialEdit.Cnpj;
+        model.Estado = filialEdit.Estado;
+        model.Cidade = filialEdit.Cidade;
+
+        _repository.Update(model);
+
+        return RedirectToAction("Index");
     }
 
 
@@ -43,17 +65,12 @@ public class FilialController : Controller
 
 
     [HttpPost]
-    public IActionResult Create(FilialViewModel filialCreate)
+    public IActionResult Create(Filial filialCreate)
     {
         if(!ModelState.IsValid)
             return View(filialCreate);
 
-        var filial = _factory.CreateFilial(filialCreate);
-
-        if (filial == null)
-            return BadRequest();
-
-        _repository.Create(filial);
+        _repository.Create(filialCreate);
         return RedirectToAction("Index");
     }
 }

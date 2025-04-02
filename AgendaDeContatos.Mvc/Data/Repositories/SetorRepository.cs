@@ -33,8 +33,6 @@ public class SetorRepository : IRepository<Setor>
 
         if (!filialExisteNaBase)
             throw new InvalidOperationException($"Filial nao existe na base: {entity.FilialId}");
-
-        _context.CompatibilitySetor.Verify(entity);
     }
 
 
@@ -52,5 +50,10 @@ public class SetorRepository : IRepository<Setor>
     public IEnumerable<Setor> GetAll()
     {
         return _context.Setores.OrderBy(s => s.Filial).ThenBy(s => s.Nome).ToList();
+    }
+
+    public void Update(Setor entity)
+    {
+        throw new NotImplementedException();
     }
 }

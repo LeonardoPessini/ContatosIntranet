@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Filial>
+﻿@model IEnumerable<Setor>
 
 <div class="container">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Filiais</h2>
-        <a class="btn btn-primary" asp-area="" asp-controller="Filial" asp-action="Create" role="button">Adicionar</a>
+        <a class="btn btn-primary" asp-area="" asp-controller="Setor" asp-action="Create" role="button">Adicionar</a>
     </div>
 
     <table class="table table-striped table-hover">
@@ -13,21 +13,17 @@
                 <td></td>
                 <td>Id</td>
                 <td>Nome</td>
-                <td>Cidade</td>
-                <td>Estado</td>
-                <td>CNPJ</td>
+                <td>Filial</td>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td><a asp-controller="Filial" asp-action="Edit" asp-route-filialId="@item.Id">Editar</a></td>
+                    <td><a asp-controller="Setor" asp-action="Edit" asp-route-id="@item.Id">Editar</a></td>
                     <td>@item.Id</td>
                     <td>@item.Nome</td>
-                    <td>@item.Cidade</td>
-                    <td>@item.Estado</td>
-                    <td>@item.Cnpj</td>
+                    <td>@item.Filial.Nome</td>
                 </tr>
             }
         </tbody>

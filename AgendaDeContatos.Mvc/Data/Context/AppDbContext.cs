@@ -12,18 +12,8 @@ public class AppDbContext : DbContext
     public DbSet<Contato> Contatos { get; set; }
 
 
-    public CheckCompatibilityFilial CompatibilityFilial { get; init; }
-    public CheckCompatibilitySetor CompatibilitySetor { get; init; }
-    public CheckCompatibilityContato CompatibilityContato { get; init; }
-
-
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    { 
-        CompatibilityFilial = new CheckCompatibilityFilial();
-        CompatibilitySetor = new CheckCompatibilitySetor();
-        CompatibilityContato = new CheckCompatibilityContato();
-    }
-
+    { }
 
     protected override void OnModelCreating(ModelBuilder model)
     {

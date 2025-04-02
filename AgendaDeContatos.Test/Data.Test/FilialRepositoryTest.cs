@@ -84,28 +84,6 @@ public class FilialRepositoryTest
 
 
     [Fact]
-    public void Create_NomeDeExibicao_NaoDeveCriarComValorMaiorQueODaColuna()
-    {
-        var nomeMuitoGrande = new Randomizer().String2(31);
-        var filial = FilialBuilder.Create().WithNome(nomeMuitoGrande).WithId(0).Build();
-
-        Assert.Throws<OverflowException>(()=> _repository.Create(filial))
-            .WithMessage($"Valor muito grande para ser armazenado : {filial.Nome}");
-    }
-
-
-    [Fact]
-    public void Create_Cidade_NaoDeveCriarComValorMaiorQueODaColuna()
-    {
-        var nomeMuitoGrande = new Randomizer().String2(41);
-        var filial = FilialBuilder.Create().WithCidade(nomeMuitoGrande).WithId(0).Build();
-
-        Assert.Throws<OverflowException>(() => _repository.Create(filial))
-            .WithMessage($"Valor muito grande para ser armazenado : {filial.Cidade}");
-    }
-
-
-    [Fact]
     public void Create_DeveLancarExceptionSeIdForDiferenteDe0()
     {
         var filial = FilialBuilder.Create().Build();
@@ -123,5 +101,17 @@ public class FilialRepositoryTest
         _repository.Create(filial);
 
         Assert.NotEqual(0, filial.Id);
+    }
+
+
+    [Fact]
+    public void Update_DeveAtualizarFilial()
+    {
+        var filial = _context.Filiais.First();
+        filial!.Nome = "Novo nome";
+
+        _repository.Update(_filial);
+
+        Assert.Equal(filial.Nome, _filial.Nome);
     }
 }

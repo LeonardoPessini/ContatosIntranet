@@ -37,6 +37,11 @@ public class ContatoRepository : IRepository<Contato>
         return _context.Contatos.Where(c => c.Nome.Contains(name));
     }
 
+    public void Update(Contato entity)
+    {
+        throw new NotImplementedException();
+    }
+
     private void CheckIfItCanBeStored(Contato model)
     {
         if(model.Id != 0)
@@ -47,7 +52,5 @@ public class ContatoRepository : IRepository<Contato>
 
         if (_context.Setores.FirstOrDefault(s => s.Id == model.SetorId) == null)
             throw new InvalidOperationException($"Setor nao existe na base: {model.SetorId}");
-
-        _context.CompatibilityContato.Verify(model);
     }
 }

@@ -17,19 +17,11 @@ public class FilialRepository : IRepository<Filial>
 
     public void Create(Filial entity)
     {
-        CheckIfItCanBeStored(entity);
-
-        _context.Filiais.Add(entity);
-        _context.SaveChanges();
-    }
-
-
-    private void CheckIfItCanBeStored(Filial entity)
-    {
         if (entity.Id != 0)
             throw new InvalidOperationException("Nao e possivel armazenar um objeto que possui ID definido");
 
-        _context.CompatibilityFilial.Verify(entity);
+        _context.Filiais.Add(entity);
+        _context.SaveChanges();
     }
 
 
@@ -49,5 +41,11 @@ public class FilialRepository : IRepository<Filial>
     public IEnumerable<Filial> GetAll()
     {
         return _context.Filiais.OrderBy(f => f.Id).ToList();
+    }
+
+    public void Update(Filial entity)
+    {
+        _context.Filiais.Update(entity);
+        _context.SaveChanges();
     }
 }

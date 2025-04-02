@@ -1,21 +1,26 @@
-﻿@model FilialViewModel
+﻿@model Filial
 
-<form class="row g-3" method="post" asp-controller="Filial" asp-action="Create">
+<form class="row g-3" method="post" asp-area="" asp-controller="Filial" asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
     <div class="col-12">
-        <label for="Nome" class="form-label">* Nome de Exibição</label>
-        <input type="text" class="form-control" id="Nome" value="@Model.Nome">
+        <label asp-for="Nome" class="form-label">* Nome de Exibição</label>
+        <input class="form-control" asp-for="Nome">
+        <span asp-validation-for="Nome" class="text-danger"></span>
     </div>
     <div class="col-md-6">
-        <label for="Cidade" class="form-label">Cidade</label>
-        <input type="text" class="form-control" id="Cidade" value="@Model.Cidade">
+        <label asp-for="Cidade" class="form-label">Cidade</label>
+        <input class="form-control" asp-for="Cidade">
+        <span asp-validation-for="Cidade" class="text-danger"></span>
     </div>
     <div class="col-md-2">
-        <label for="Estado" class="form-label">Estado</label>
-        <input type="text" class="form-control" id="Estado" placeholder="SP, ES, MG..." value="@Model.Estado">
+        <label asp-for="Estado" class="form-label">Estado</label>
+        <input class="form-control" asp-for="Estado" placeholder="SP, ES, MG...">
+        <span asp-validation-for="Estado" class="text-danger"></span>
     </div>
     <div class="col-4">
-        <label for="Cnpj" class="form-label">CNPJ</label>
-        <input type="number" class="form-control" id="Cnpj" value="@Model.Cnpj">
+        <label asp-for="Cnpj" class="form-label">CNPJ</label>
+        <input type="text" class="form-control" asp-for="Cnpj" placeholder="Apenas numeros">
+        <span asp-validation-for="Cnpj" class="text-danger"></span>
     </div>
     <div class="col-12">
         <button type="submit" class="btn btn-success">Salvar</button>

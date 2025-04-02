@@ -136,67 +136,6 @@ public class ContatoRepositoryTest
         Assert.NotEqual(0, _contato.Id);
     }
 
-
-    [Fact]
-    public void Create_NaoDeveCriarContatoComNomeOverflow()
-    {
-        var nomeMuitoGrande = new Randomizer().String2(51);
-        var contato = ContatoBuilder.Create()
-                                    .WithNome(nomeMuitoGrande)
-                                    .WithId(0)
-                                    .WithSetorId(_setor.Id)
-                                    .Build();
-
-        Assert.Throws<OverflowException>(() => _repository.Create(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Nome}");
-    }
-
-
-    [Fact]
-    public void Create_NaoDeveCriarContatoComRamalOverflow()
-    {
-        var ramalMuitoGrande = new Randomizer().String2(11);
-        var contato = ContatoBuilder.Create()
-                                    .WithRamal(ramalMuitoGrande)
-                                    .WithId(0)
-                                    .WithSetorId(_setor.Id)
-                                    .Build();
-
-        Assert.Throws<OverflowException>(() => _repository.Create(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Ramal}");
-    }
-
-
-    [Fact]
-    public void Create_NaoDeveCriarContatoComEmailOverflow()
-    {
-        var emailMuitoGrande = new Randomizer().String2(101);
-        var contato = ContatoBuilder.Create()
-                                    .WithEmail(emailMuitoGrande)
-                                    .WithId(0)
-                                    .WithSetorId(_setor.Id)
-                                    .Build();
-
-        Assert.Throws<OverflowException>(() => _repository.Create(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Email}");
-    }
-
-
-    [Fact]
-    public void Create_NaoDeveCriarContatoComCelularOverflow()
-    {
-        var celularMuitoGrande = new Randomizer().String2(15);
-        var contato = ContatoBuilder.Create()
-                                    .WithCelular(celularMuitoGrande)
-                                    .WithId(0)
-                                    .WithSetorId(_setor.Id)
-                                    .Build();
-
-        Assert.Throws<OverflowException>(() => _repository.Create(contato))
-            .WithMessage($"Valor muito grande para ser armazenado : {contato.Celular}");
-    }
-
-
     [Fact]
     public void Create_NaoDeveCriarSeIdForAtribuido()
     {

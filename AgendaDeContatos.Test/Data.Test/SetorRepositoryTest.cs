@@ -103,17 +103,6 @@ public class SetorRepositoryTest
 
 
     [Fact]
-    public void Create_NaoDeveCriarSetorComNomeOverflow()
-    {
-        var nomeMuitoGrande = new Randomizer().String2(41);
-        var setor = SetorBuilder.Create().WithNome(nomeMuitoGrande).WithId(0).WithFilialId(_filial.Id).Build();
-
-        Assert.Throws<OverflowException>(() => _repository.Create(setor))
-            .WithMessage($"Valor muito grande para ser armazenado : {setor.Nome}");
-    }
-
-
-    [Fact]
     public void Create_NaoDeveCriarSeIdForAtribuido()
     {
         var setor = SetorBuilder.Create().WithId(1).Build();
