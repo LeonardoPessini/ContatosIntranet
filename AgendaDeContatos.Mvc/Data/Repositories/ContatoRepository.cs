@@ -22,6 +22,11 @@ public class ContatoRepository : IRepository<Contato>
         _context.SaveChanges();
     }
 
+    public void Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public IEnumerable<Contato> GetAll()
     {
         return _context.Contatos.OrderBy(c => c.Setor.FilialId).ThenBy(c => c.SetorId).ThenBy(c => c.Nome).ToList();

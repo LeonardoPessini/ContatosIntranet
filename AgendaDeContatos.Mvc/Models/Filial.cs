@@ -14,7 +14,8 @@ public class Filial
 
     private string? _estado;
 
-    [Length(maximumLength: 2, minimumLength: 2, ErrorMessage = "O tamnho deve ser exatos 2 caracteres")]
+    [MaxLength(2, ErrorMessage = "O tamnho deve ser exatos 2 caracteres")]
+    [MinLength(2, ErrorMessage = "O tamnho deve ser exatos 2 caracteres")]
     public string? Estado { 
         get => _estado;
         set{
@@ -32,7 +33,8 @@ public class Filial
 
     private string? _cnpj;
 
-    [Length(maximumLength: 14, minimumLength: 14, ErrorMessage = "O tamanho deve ser exatos 14 caracteres, Sem pontos ou virgulas")]
+    [MaxLength(14, ErrorMessage = "O tamanho deve ser exatos 14 caracteres, Sem pontos ou virgulas")]
+    [MinLength(14, ErrorMessage = "O tamanho deve ser exatos 14 caracteres, Sem pontos ou virgulas")]
     public string? Cnpj { 
         get => _cnpj; 
         set {

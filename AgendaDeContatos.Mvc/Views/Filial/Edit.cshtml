@@ -22,7 +22,8 @@
         <input type="text" class="form-control" asp-for="Cnpj" placeholder="Apenas numeros">
         <span asp-validation-for="Cnpj" class="text-danger"></span>
     </div>
-    <div class="col-12">
+    <div class="col-12 me-2">
         <button type="submit" class="btn btn-success">Salvar</button>
-    </div>
+        <a class="btn btn-secondary" asp-controller="Filial" asp-action="Index">Cancelar</a>
+    </div>    
 </form>

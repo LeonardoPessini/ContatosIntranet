@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaDeContatos.Mvc", "AgendaDeContatos.Mvc\AgendaDeContatos.Mvc.csproj", "{6A5F54EE-A780-4DC1-9357-3571C9B33FCC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaDeContatos.Test", "AgendaDeContatos.Test\AgendaDeContatos.Test.csproj", "{D53E2FB6-96AE-4BDA-8448-24C793E055DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{6A5F54EE-A780-4DC1-9357-3571C9B33FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A5F54EE-A780-4DC1-9357-3571C9B33FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A5F54EE-A780-4DC1-9357-3571C9B33FCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D53E2FB6-96AE-4BDA-8448-24C793E055DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D53E2FB6-96AE-4BDA-8448-24C793E055DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D53E2FB6-96AE-4BDA-8448-24C793E055DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D53E2FB6-96AE-4BDA-8448-24C793E055DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

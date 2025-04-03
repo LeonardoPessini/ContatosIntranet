@@ -1,6 +1,8 @@
 ﻿using AgendaDeContatos.Mvc.Data.Context;
 using AgendaDeContatos.Mvc.Data.Repositories.Interfaces;
 using AgendaDeContatos.Mvc.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace AgendaDeContatos.Mvc.Data.Repositories;
@@ -45,7 +47,14 @@ public class FilialRepository : IRepository<Filial>
 
     public void Update(Filial entity)
     {
-        _context.Filiais.Update(entity);
+        _context.Filiais.Attach(entity).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
+    public void Delete(int id)
+    {
+        var filial = _context.Filiais.FirstOrDefault(f => f.Id == id)!;
+        _context.Remove(filial);
         _context.SaveChanges();
     }
 }

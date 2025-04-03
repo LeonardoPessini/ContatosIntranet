@@ -1,0 +1,34 @@
+﻿@model Filial
+
+<h1>Deseja Excluir?</h1>
+<table class="table table-borderless">
+    <tbody>
+        <tr>
+            <td>Id</td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Nome</td>
+            <td>@Model.Nome</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>@Model.Cidade</td>
+        </tr>
+        <tr>
+            <td>Estado</td>
+            <td>@Model.Estado</td>
+        </tr>
+        <tr>
+            <td>Cnpj</td>
+            <td>@Model.Cnpj</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a class="btn btn-danger me-md-2" asp-controller="Filial" asp-action="Remove" asp-route-entityId="@Model.Id">Excluir</a>
+    <a class="btn btn-secondary" asp-controller="Filial" asp-action="Index">Voltar</a>
+</div>
+

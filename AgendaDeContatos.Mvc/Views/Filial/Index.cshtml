@@ -10,24 +10,26 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <td></td>
                 <td>Id</td>
                 <td>Nome</td>
                 <td>Cidade</td>
                 <td>Estado</td>
                 <td>CNPJ</td>
+                <td colspan="2"></td>
+
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td><a asp-controller="Filial" asp-action="Edit" asp-route-filialId="@item.Id">Editar</a></td>
                     <td>@item.Id</td>
                     <td>@item.Nome</td>
                     <td>@item.Cidade</td>
                     <td>@item.Estado</td>
                     <td>@item.Cnpj</td>
+                    <td><a asp-controller="Filial" asp-action="Edit" asp-route-entityId="@item.Id">Editar</a></td>
+                    <td><a asp-controller="Filial" asp-action="Delete" asp-route-entityId="@item.Id">Excluir</a></td>
                 </tr>
             }
         </tbody>

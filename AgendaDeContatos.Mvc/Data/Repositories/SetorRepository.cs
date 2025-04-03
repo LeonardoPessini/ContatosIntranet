@@ -56,4 +56,9 @@ public class SetorRepository : IRepository<Setor>
     {
         throw new NotImplementedException();
     }
+
+    public void Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
 }
